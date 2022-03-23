@@ -39,6 +39,9 @@ const TodoCheckbox = styled.div`
 
 const Title = styled.p`
     flex: 1;
+    width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
     font-size: 16px;
     margin-left: 25px;
     text-decoration: ${(props) => props.isCompleted ? 'line-through' : 'none'};
@@ -72,7 +75,7 @@ const TodoItem = ({todo}) => {
             </Title>
             <IconContext.Provider value={{
                 color: todo.isImportant ? theme.importantSelectedColor : theme.borderColor, size: '18px',
-                style: { transition: `color ${theme.transitionTime}ms` }
+                style: { transition: `color ${theme.transitionTime}ms`, marginLeft: '10px' }
             }}>
                 <FiIcons.FiStar onClick={() => toggleImportantTodo(todo.id)}/>
             </IconContext.Provider>

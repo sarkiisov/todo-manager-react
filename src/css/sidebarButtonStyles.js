@@ -3,7 +3,7 @@ import { css } from 'styled-components';
 const buttonStyle = css`
     display: flex;
     align-items: center;
-    width: 100%;
+    max-width: 100%;
     height: 50px;
     background-color: none;
     padding: 0px 25px;
@@ -16,6 +16,9 @@ const buttonStyle = css`
 `;
 
 const titleStyle = css`
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
     font-size: 16px;
     margin-left: 15px;
 `;

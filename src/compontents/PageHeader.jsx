@@ -10,7 +10,7 @@ import useOutsideClick from '../hooks/useOutsideClick';
 const Header = styled.div`
     display: flex;
     align-items: center;
-    width: auto;
+    max-width: 100%;
     height: 100px;
     padding: 50px;
 `;
@@ -23,6 +23,10 @@ const FakeDiv = styled.div`
 `;
 
 const Title = styled.h2`
+    flex: 1;
+    width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
     font-weight: 500;
     padding: 10px 10px 10px 0px;
     transition: ${(props) => props.theme.transitionTime}ms;

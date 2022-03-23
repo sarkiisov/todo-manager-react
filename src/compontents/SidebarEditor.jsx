@@ -43,7 +43,7 @@ const SidebarEditor = () => {
 
     const handleKeyDown = (e) => {
         if(e.key == 'Enter') {
-            if(collectionFree) addCollection(new CustomCollection(inputValue));
+            if(collectionFree && inputValue) addCollection(new CustomCollection(inputValue));
             setEditorOpened(false);
         }
     };
