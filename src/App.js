@@ -18,6 +18,12 @@ const AppWrapper = styled.div`
     background-color: ${(props) => props.theme.backgroundColor};
     color: ${(props) => props.theme.textColor};
     transition: background-color ${(props) => props.theme.transitionTime}ms;
+
+    h2, p {
+        &::selection {
+            background: ${(props) => props.theme.textSelectedBackgroundColor};
+        }
+    }
 `;
 
 const Sidebar = styled.div`

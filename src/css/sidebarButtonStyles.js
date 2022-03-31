@@ -8,6 +8,7 @@ const buttonStyle = css`
     background-color: none;
     padding: 0px 25px;
     transition: background-color ${(props) => props.theme.transitionTime}ms;
+    user-select: none;
 
     &:hover {
         cursor: pointer;

@@ -58,6 +58,7 @@ const DropdownOption = styled.div`
     font-size: 14px;
     background-color: ${(props) => props.theme.backgroundColor};
     transition: ${(props) => props.theme.transitionTime}ms;
+    user-select: none;
 
     &:last-child {
         border-radius: 0px 0px 5px 5px;

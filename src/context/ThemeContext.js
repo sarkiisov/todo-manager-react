@@ -19,7 +19,8 @@ const Themes = {
         borderColor: '#DCDCDC',
         boxShadowColor: 'rgba(0, 0, 0, 0.25)',
         buttonSelectedColor: '#F5F5F5',
-        titleBarBackgroundColor: '#E4E4E4'
+        titleBarBackgroundColor: '#E4E4E4',
+        textSelectedBackgroundColor: '#EDEDED'
     },
     dark: {
         ...Globals,
@@ -28,7 +29,8 @@ const Themes = {
         borderColor: '#393939',
         boxShadowColor: 'rgba(137, 137, 137, 0.25)',
         buttonSelectedColor: '#272727',
-        titleBarBackgroundColor: '#1B1B1B'
+        titleBarBackgroundColor: '#1B1B1B',
+        textSelectedBackgroundColor: '#3A3A3A'
     }
 };
 
