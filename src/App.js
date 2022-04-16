@@ -19,7 +19,7 @@ const AppWrapper = styled.div`
     color: ${(props) => props.theme.textColor};
     transition: background-color ${(props) => props.theme.transitionTime}ms;
 
-    h2, p {
+    h2, p, input {
         &::selection {
             background: ${(props) => props.theme.textSelectedBackgroundColor};
         }

@@ -40,7 +40,7 @@ const TodoEditor = () => {
     const { routes, activeRouteIndex } = useContext(RouterContext);
 
     const handleKeyDown = (e) => {
-        if(e.key == 'Enter') {
+        if(e.key == 'Enter' && inputRef.current.value != '') {
             addTodo(new Todo(
                 inputRef.current.value,
                 routes[activeRouteIndex].type == 'important-collection' ? true : false,

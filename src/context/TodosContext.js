@@ -7,7 +7,7 @@ const TodosProvider = ({children}) => {
     const [todos, setTodos] = useState(initialTodos == null ? [] : JSON.parse(initialTodos));
 
     const addTodo = (todo) => {
-        setTodos([...todos, todo]);
+        setTodos([todo, ...todos]);
     };
 
     const toggleCompleteTodo = (id) => {
