@@ -22,6 +22,7 @@ const DropdownBlock = styled.div`
     border: 1px solid ${(props) => props.theme.borderColor};
     border-radius: 5px;
     font-size: 14px;
+    user-select: none;
     background-color: ${(props) => props.isOpened ? props.theme.buttonSelectedColor : props.theme.backgroundColor};
     transition: ${(props) => props.theme.transitionTime}ms;
 
@@ -41,6 +42,7 @@ const DropdownStatusIcon = styled.span`
 
 const DropdownOptions = styled.div`
     position: absolute;
+    z-index: 2;
     width: 100%;
     border-radius: 5px;
     box-shadow: 0px 2px 5px ${(props) => props.theme.boxShadowColor};
@@ -74,23 +76,22 @@ const DropdownOption = styled.div`
     }
 `;
 
-const DropdownMenu = () => {
-    const {theme, themeKey, themesKeys, setThemeByKey} = useContext(ThemeContext);
+const DropdownMenu = ({options, selectedOption, onChange}) => {
+    const {theme} = useContext(ThemeContext);
     const [optionsOpened, setOptionsOpened] = useState(false);
-    const [option, setOption] = useState(themeKey);
+    const [option, setOption] = useState(selectedOption);
 
     const toggleOptionMenu = () => {
         setOptionsOpened(!optionsOpened);
     };
 
     const handleClick = (value) => {
-        setTimeout(() => {
-            setThemeByKey(value);
-            setOption(value);
-        }, theme.componentTransitionTime);
+        setOption(value);
+        onChange(value);
     };
 
     const dropdownRef = useRef(null);
+
     useOutsideClick(dropdownRef, () => {
         setOptionsOpened(false);
     });
@@ -103,7 +104,7 @@ const DropdownMenu = () => {
             </DropdownBlock>
             <CSSTransition in={optionsOpened} timeout={theme.componentTransitionTime} classNames="dropdown-options" unmountOnExit>
                 <DropdownOptions>
-                    {themesKeys.map((key, index) =>
+                    {options.map((key, index) =>
                         <DropdownOption onClick={() => handleClick(key)} key={index}>
                             <p>{key}</p>
                         </DropdownOption>

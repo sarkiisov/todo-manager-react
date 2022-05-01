@@ -10,9 +10,9 @@ import { AppRoute } from '../models/AppRoute';
 const RouterContext = createContext();
 
 const GlobalRoutes = [
-    new AppRoute('defined-collection', null, '/', 'Overview', <FiIcons.FiHome />, <TodoList filter={(todo) => todo}/>),
-    new AppRoute('important-collection', null, '/important', 'Important', <FiIcons.FiStar />, <TodoList filter={(todo) => todo.isImportant} />),
-    new AppRoute('service', null, '/settings', 'Settings', <FiIcons.FiSettings />, <SettingsList />)
+    new AppRoute('defined-collection', null, '/', 'Overview', <FiIcons.FiHome />, null, <TodoList filter={(todo) => todo}/>),
+    new AppRoute('important-collection', null, '/important', 'Important', <FiIcons.FiStar />, null, <TodoList filter={(todo) => todo.isImportant} />),
+    new AppRoute('service', null, '/settings', 'Settings', <FiIcons.FiSettings />, null, <SettingsList />)
 ];
 
 const RouterProvider = ({children}) => {
@@ -28,8 +28,12 @@ const RouterProvider = ({children}) => {
         setRoutes([...routes, appRoute]);
     };
 
-    const updateRoute = (collectionId, title) => {
-        setRoutes(routes.map((route) => route?.collectionId == collectionId ? {...route, title} : route));
+    const updateRoute = (collectionId, title, buttonEmojiIcon) => {
+        setRoutes(routes.map((route) => route?.collectionId == collectionId ? {
+            ...route,
+            title,
+            buttonEmojiIcon: buttonEmojiIcon === undefined ? route.buttonEmojiIcon : buttonEmojiIcon
+        } : route));
     };
 
     const removeRoute = (collectionId) => {

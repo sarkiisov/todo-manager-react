@@ -39,7 +39,7 @@ const TitleBar = () => {
 
     return(
         <BarWrapper>
-            <IconContext.Provider value={{ color: theme.textColor, size: '16px'}}>
+            <IconContext.Provider value={{ color: theme.textColor, size: '16px' }}>
                 <ControlButton className="minimize-window-button">
                     <FiIcons.FiMinus />
                 </ControlButton>

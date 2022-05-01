@@ -54,7 +54,7 @@ const TodoEditor = () => {
 
     return(
         <Editor>
-            <IconContext.Provider value={{ color: theme.borderColor, size: '24px', style: { transition: `color ${theme.transitionTime}ms` } }}>
+            <IconContext.Provider value={{ color: theme.borderColor, size: '24px', style: {transition: `color ${theme.transitionTime}ms`} }}>
                 <FiIcons.FiPlus />
             </IconContext.Provider>
             <Input placeholder="Add new task" onKeyDown={handleKeyDown} ref={inputRef}></Input>

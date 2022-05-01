@@ -1,7 +1,10 @@
+import { useContext, useState } from 'react';
 import styled from 'styled-components';
+import { ThemeContext } from '../context/ThemeContext';
 import { contentBlockStyle } from '../css/contentBlockStyles';
 
 import DropdownMenu from './DropdownMenu';
+import SettingsItem from './SettingsItem';
 
 
 const Wrapper = styled.div`
@@ -27,15 +30,27 @@ const Item = styled.div`
 `;
 
 const SettingsList = () => {
+    const {theme, themeKey, themesKeys, setThemeByKey} = useContext(ThemeContext);
+
     return(
         <Wrapper>
             <Header>
                 <p>Appearance</p>
             </Header>
-            <Item>
-                <p>Application theme</p>
-                <DropdownMenu />
-            </Item>
+            <SettingsItem
+                title="Application theme"
+                settingsElement={
+                    <DropdownMenu
+                        options={themesKeys}
+                        selectedOption={themeKey}
+                        onChange={(value) => {
+                            setTimeout(() => {
+                                setThemeByKey(value);
+                            }, theme.componentTransitionTime);
+                        }}
+                    />
+                }
+            />
         </Wrapper>
     );
 };

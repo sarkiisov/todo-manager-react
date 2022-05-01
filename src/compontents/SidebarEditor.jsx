@@ -9,7 +9,6 @@ import { buttonStyle, titleStyle} from '../css/sidebarButtonStyles';
 import { ThemeContext } from '../context/ThemeContext';
 import { CollectionsContext } from '../context/CollectionsContext';
 import useOutsideClick from '../hooks/useOutsideClick';
-import CustomCollection from '../models/CustomCollection';
 
 
 const Button = styled.div`
@@ -43,7 +42,7 @@ const SidebarEditor = () => {
 
     const handleKeyDown = (e) => {
         if(e.key == 'Enter') {
-            if(collectionFree && inputValue) addCollection(new CustomCollection(inputValue));
+            if(collectionFree && inputValue) addCollection(inputValue);
             setEditorOpened(false);
         }
     };

@@ -18,6 +18,7 @@ const buttonStyle = css`
 
 const titleStyle = css`
     flex: 1;
+    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     font-size: 16px;

@@ -6,6 +6,7 @@ import TodoList from '../compontents/TodoList';
 import { AppRoute } from '../models/AppRoute';
 import { RouterContext } from './RouterContext';
 import { TodosContext } from './TodosContext';
+import CustomCollection from '../models/CustomCollection';
 
 const CollectionsContext = createContext();
 
@@ -15,7 +16,11 @@ const CollectionsProvider = ({children}) => {
     const initialCollections = localStorage.getItem('collections');
     const [collections, setCollections] = useState(initialCollections == null ? [] : JSON.parse(initialCollections));
 
-    const addCollection = (collection) => {
+    const collectionEmojiArr = ['×', '🔥', '💪', '🙉', '🌊', '🧨', '🎮', '🧭', '⚡', '🍒', '🍑', '🍦', '🏆',
+        '🏀', '🎯', '🎧', '🏗️', '🏫', '🏠', '🏭', '🚗', '✈️', '💵', '🗿', '🎉', '📞', '💻', '🔧', '💊', '🛒'];
+
+    const addCollection = (title) => {
+        const collection = new CustomCollection(title);
         setCollections([...collections, collection]);
         addRoute(new AppRoute(
             'custom-collection',
@@ -23,13 +28,18 @@ const CollectionsProvider = ({children}) => {
             `/collection/${collection.id}`,
             collection.title,
             <FiIcons.FiList />,
+            collection.icon,
             <TodoList filter={(todo) => todo.collectionId == collection.id}/>
         ));
     };
 
-    const updateCollection = (id, title) => {
-        setCollections(collections.map((collection) => collection.id == id ? {...collection, title} : collection));
-        updateRoute(id, title);
+    const updateCollection = (id, title, icon) => {
+        setCollections(collections.map((collection) => collection.id == id ? {
+            ...collection,
+            title,
+            icon: icon === undefined ? collection.icon : icon
+        } : collection));
+        updateRoute(id, title, icon);
     };
 
     const removeCollection = (id) => {
@@ -46,6 +56,7 @@ const CollectionsProvider = ({children}) => {
                 `/collection/${collection.id}`,
                 collection.title,
                 <FiIcons.FiList />,
+                collection.icon,
                 <TodoList filter={(todo) => todo.collectionId == collection.id}/>
             ))
         ));
@@ -57,7 +68,7 @@ const CollectionsProvider = ({children}) => {
 
 
     return(
-        <CollectionsContext.Provider value={{ collections, addCollection, updateCollection, removeCollection}}>
+        <CollectionsContext.Provider value={{ collections, addCollection, updateCollection, removeCollection, collectionEmojiArr }}>
             {children}
         </CollectionsContext.Provider>
     );

@@ -40,6 +40,7 @@ const TodoCheckbox = styled.div`
 const Title = styled.p`
     flex: 1;
     width: 100px;
+    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     font-size: 16px;
@@ -66,7 +67,7 @@ const TodoItem = ({todo}) => {
     return(
         <Item onMouseDown={handleMouseDown}>
             <TodoCheckbox isCompleted={todo.isCompleted} onClick={toggleTodoCheckbox}>
-                <IconContext.Provider value={{ color: 'white', size: '16px', style: { strokeWidth: '3' }} }>
+                <IconContext.Provider value={{ color: 'white', size: '16px', style: { strokeWidth: '3' } }}>
                     {todo.isCompleted ? <FiIcons.FiCheck /> : null}
                 </IconContext.Provider>
             </TodoCheckbox>

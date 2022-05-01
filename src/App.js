@@ -19,7 +19,7 @@ const AppWrapper = styled.div`
     color: ${(props) => props.theme.textColor};
     transition: background-color ${(props) => props.theme.transitionTime}ms;
 
-    h2, p, input {
+    * {
         &::selection {
             background: ${(props) => props.theme.textSelectedBackgroundColor};
         }
@@ -76,7 +76,13 @@ const App = () => {
                     <MainSidebarGroup>
                         {routes.map((route, index) => {
                             return (route.type.includes('collection'))
-                                ? <SidebarButton icon={route.buttonIcon} title={route.title} id={index} route={route.to} key={index} collectionId={route.collectionId} />
+                                ? <SidebarButton
+                                    icon={route.type == 'custom-collection' && route.buttonEmojiIcon ? route.buttonEmojiIcon : route.buttonIcon}
+                                    title={route.title}
+                                    id={index}
+                                    route={route.to}
+                                    key={index}
+                                    collectionId={route.collectionId} />
                                 : null;
                         })}
                         <SidebarEditor/>
@@ -85,7 +91,12 @@ const App = () => {
                     <AddSidebarGroup>
                         {routes.map((route, index) => {
                             return (route.type == 'service')
-                                ? <SidebarButton icon={route.buttonIcon} title={route.title} route={route.to} id={index} key={index} />
+                                ? <SidebarButton
+                                    icon={route.buttonIcon}
+                                    title={route.title}
+                                    route={route.to}
+                                    id={index}
+                                    key={index} />
                                 : null;
                         })}
                     </AddSidebarGroup>
