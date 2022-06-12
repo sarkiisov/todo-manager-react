@@ -74,6 +74,7 @@ const DropdownOptions = styled.div`
     border-radius: 5px;
     background-color: ${(props) => props.theme.backgroundColor};
     box-shadow: 0px 2px 5px ${(props) => props.theme.boxShadowColor};
+    z-index: 2;
 
     ${transitionClassesStyle('dropdown-options')}
 `;
