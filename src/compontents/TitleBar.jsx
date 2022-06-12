@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 
 import styled from 'styled-components';
 import * as FiIcons from 'react-icons/fi';
@@ -35,9 +35,9 @@ const ControlButton = styled.div`
 `;
 
 const TitleBar = () => {
-    const {theme} = useContext(ThemeContext);
+    const { theme } = useContext(ThemeContext);
 
-    return(
+    return (
         <BarWrapper>
             <IconContext.Provider value={{ color: theme.textColor, size: '16px' }}>
                 <ControlButton className="minimize-window-button">

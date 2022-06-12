@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 
 import styled from 'styled-components';
 import { transitionClassesStyle } from '../css/transitionClassesStyles';
@@ -94,7 +94,7 @@ const DropdownOption = styled.div`
 `;
 
 const PageHeader = () => {
-    const {theme} = useContext(ThemeContext);
+    const { theme } = useContext(ThemeContext);
     const { routes, activeRouteIndex } = useContext(RouterContext);
     const { collections, updateCollection, collectionEmojiArr } = useContext(CollectionsContext);
 
@@ -106,8 +106,8 @@ const PageHeader = () => {
     const isEditable = routes[activeRouteIndex].collectionId ? true : false;
 
     useEffect(() => {
-        for(let collection of collections) {
-            if(collection.title == inputValue && routes[activeRouteIndex].title != inputValue) {
+        for (const collection of collections) {
+            if (collection.title == inputValue && routes[activeRouteIndex].title != inputValue) {
                 setCollectionFree(false);
                 break;
             } else {
@@ -117,7 +117,7 @@ const PageHeader = () => {
     }, [inputValue]);
 
     useEffect(() => {
-        if(collectionFree && inputValue && inputValue != routes[activeRouteIndex].title) {
+        if (collectionFree && inputValue && inputValue != routes[activeRouteIndex].title) {
             updateCollection(routes[activeRouteIndex].collectionId, inputValue);
         }
     }, [editorOpened]);
@@ -140,7 +140,7 @@ const PageHeader = () => {
         setIconEditorOpened(false);
     };
 
-    return(
+    return (
         <Header>
             {editorOpened
                 ?
@@ -150,7 +150,7 @@ const PageHeader = () => {
                             ?
                             routes[activeRouteIndex].buttonEmojiIcon
                             :
-                            <IconContext.Provider value={{ color: theme.borderColor, size: '28px', style: { transition: `color ${theme.transitionTime}ms`, pointerEvents: 'none'}}}>
+                            <IconContext.Provider value={{ color: theme.borderColor, size: '28px', style: { transition: `color ${theme.transitionTime}ms`, pointerEvents: 'none' } }}>
                                 <FiIcons.FiSmile />
                             </IconContext.Provider>}
                     </IconEditorButton>
@@ -168,7 +168,7 @@ const PageHeader = () => {
                 :
                 <Title isEditable={isEditable} onClick={() => isEditable && setEditorOpened(true)}>
                     {routes[activeRouteIndex].type == 'custom-collection' && routes[activeRouteIndex].buttonEmojiIcon != null
-                        ? routes[activeRouteIndex].buttonEmojiIcon + ' '  + routes[activeRouteIndex].title
+                        ? routes[activeRouteIndex].buttonEmojiIcon + ' ' + routes[activeRouteIndex].title
                         : routes[activeRouteIndex].title
                     }
                 </Title>

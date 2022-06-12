@@ -1,8 +1,8 @@
-import { useState, createContext, useEffect } from 'react';
+import React, { useState, createContext, useEffect } from 'react';
 
 const TodosContext = createContext();
 
-const TodosProvider = ({children}) => {
+const TodosProvider = ({ children }) => {
     const initialTodos = localStorage.getItem('todos');
     const [todos, setTodos] = useState(initialTodos == null ? [] : JSON.parse(initialTodos));
 
@@ -11,11 +11,11 @@ const TodosProvider = ({children}) => {
     };
 
     const toggleCompleteTodo = (id) => {
-        setTodos(todos.map((todo) => todo.id == id ? {...todo, isCompleted: !todo.isCompleted} : todo));
+        setTodos(todos.map((todo) => todo.id == id ? { ...todo, isCompleted: !todo.isCompleted } : todo));
     };
 
     const toggleImportantTodo = (id) => {
-        setTodos(todos.map((todo) => todo.id == id ? {...todo, isImportant: !todo.isImportant} : todo));
+        setTodos(todos.map((todo) => todo.id == id ? { ...todo, isImportant: !todo.isImportant } : todo));
     };
 
     const removeTodo = (id) => {
@@ -30,7 +30,7 @@ const TodosProvider = ({children}) => {
         localStorage.setItem('todos', JSON.stringify(todos));
     }, [todos]);
 
-    return(
+    return (
         <TodosContext.Provider value={{ todos, addTodo, toggleCompleteTodo, toggleImportantTodo, removeTodo, removeTodos }}>
             {children}
         </TodosContext.Provider>

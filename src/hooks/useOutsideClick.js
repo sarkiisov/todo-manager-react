@@ -3,10 +3,14 @@ import { useEffect } from 'react';
 const useOutsideClick = (ref, callback, excludeElements) => {
     useEffect(() => {
         function isExcluded(element) {
-            if(!excludeElements) return false;
-            for(let curElement of excludeElements) {
-                if(curElement.current == null) continue;
-                if(curElement.current == element || curElement.current.contains(element)) {
+            if (!excludeElements) {
+                return false;
+            }
+            for (const curElement of excludeElements) {
+                if (curElement.current == null) {
+                    continue;
+                }
+                if (curElement.current == element || curElement.current.contains(element)) {
                     return true;
                 }
             }

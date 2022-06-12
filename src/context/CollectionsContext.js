@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 
 import * as FiIcons from 'react-icons/fi';
 
@@ -10,14 +10,16 @@ import CustomCollection from '../models/CustomCollection';
 
 const CollectionsContext = createContext();
 
-const CollectionsProvider = ({children}) => {
+const CollectionsProvider = ({ children }) => {
     const { removeTodos } = useContext(TodosContext);
     const { addRoutes, addRoute, updateRoute, removeRoute } = useContext(RouterContext);
     const initialCollections = localStorage.getItem('collections');
     const [collections, setCollections] = useState(initialCollections == null ? [] : JSON.parse(initialCollections));
 
-    const collectionEmojiArr = ['×', '🔥', '💪', '🙉', '🌊', '🧨', '🎮', '🧭', '⚡', '🍒', '🍑', '🍦', '🏆',
-        '🏀', '🎯', '🎧', '🏗️', '🏫', '🏠', '🏭', '🚗', '✈️', '💵', '🗿', '🎉', '📞', '💻', '🔧', '💊', '🛒'];
+    const collectionEmojiArr = [
+        '×', '🔥', '💪', '🙉', '🌊', '🧨', '🎮', '🧭', '⚡', '🍒', '🍑', '🍦', '🏆',
+        '🏀', '🎯', '🎧', '🏗️', '🏫', '🏠', '🏭', '🚗', '✈️', '💵', '🗿', '🎉', '📞', '💻', '🔧', '💊', '🛒'
+    ];
 
     const addCollection = (title) => {
         const collection = new CustomCollection(title);
@@ -67,7 +69,7 @@ const CollectionsProvider = ({children}) => {
     }, [collections]);
 
 
-    return(
+    return (
         <CollectionsContext.Provider value={{ collections, addCollection, updateCollection, removeCollection, collectionEmojiArr }}>
             {children}
         </CollectionsContext.Provider>

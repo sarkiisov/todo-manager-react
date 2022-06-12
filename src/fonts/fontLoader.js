@@ -1,5 +1,5 @@
 const fontFace = (name, src, fontStyle = 'normal', fontWeight = 'normal') => {
-    return`
+    return `
         @font-face {
             font-family: '${name}';
             src: url(${src}) format('truetype');

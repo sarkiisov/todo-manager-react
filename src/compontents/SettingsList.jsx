@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { ThemeContext } from '../context/ThemeContext';
 import { contentBlockStyle } from '../css/contentBlockStyles';
@@ -20,19 +20,10 @@ const Header = styled.div`
     font-weight: 500;
 `;
 
-const Item = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: auto;
-    height: 50px;
-    font-size: 16px;
-`;
-
 const SettingsList = () => {
-    const {theme, themeKey, themesKeys, setThemeByKey} = useContext(ThemeContext);
+    const { theme, themeKey, themesKeys, setThemeByKey } = useContext(ThemeContext);
 
-    return(
+    return (
         <Wrapper>
             <Header>
                 <p>Appearance</p>

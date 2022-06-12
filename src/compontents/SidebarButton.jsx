@@ -1,8 +1,7 @@
-import { useContext, useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
 
 import styled from 'styled-components';
-import { buttonStyle, titleStyle} from '../css/sidebarButtonStyles';
+import { buttonStyle, titleStyle } from '../css/sidebarButtonStyles';
 import { IconContext } from 'react-icons';
 
 import { ThemeContext } from '../context/ThemeContext';
@@ -20,7 +19,7 @@ const Title = styled.p`
 `;
 
 const SidebarButton = ({ icon, title, route, id, collectionId }) => {
-    const {theme} = useContext(ThemeContext);
+    const { theme } = useContext(ThemeContext);
     const { activeRouteIndex, navigateRoute } = useContext(RouterContext);
     const { removeCollection } = useContext(CollectionsContext);
     const [isActive, setIsActive] = useState(false);
@@ -31,7 +30,7 @@ const SidebarButton = ({ icon, title, route, id, collectionId }) => {
     };
 
     const handleMouseDown = (e) => {
-        if(e.button == 1 && collectionId) {
+        if (e.button == 1 && collectionId) {
             removeCollection(collectionId);
         }
     };
@@ -40,9 +39,9 @@ const SidebarButton = ({ icon, title, route, id, collectionId }) => {
         setIsActive(id == activeRouteIndex ? true : false);
     }, [activeRouteIndex]);
 
-    return(
+    return (
         <Button onClick={handleClick} onMouseDown={handleMouseDown} isActive={isActive}>
-            <IconContext.Provider value={{ color: theme.textColor, size: '18px', style: { transition: `color ${theme.transitionTime}ms`} }}>
+            <IconContext.Provider value={{ color: theme.textColor, size: '18px', style: { transition: `color ${theme.transitionTime}ms` } }}>
                 {icon}
             </IconContext.Provider>
             <Title>{title}</Title>

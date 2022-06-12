@@ -1,4 +1,4 @@
-import { useContext, useRef } from 'react';
+import React, { useContext, useRef } from 'react';
 
 import styled from 'styled-components';
 import * as FiIcons from 'react-icons/fi';
@@ -35,12 +35,12 @@ const Input = styled.input`
 `;
 
 const TodoEditor = () => {
-    const {theme} = useContext(ThemeContext);
-    const {addTodo} = useContext(TodosContext);
+    const { theme } = useContext(ThemeContext);
+    const { addTodo } = useContext(TodosContext);
     const { routes, activeRouteIndex } = useContext(RouterContext);
 
     const handleKeyDown = (e) => {
-        if(e.key == 'Enter' && inputRef.current.value != '') {
+        if (e.key == 'Enter' && inputRef.current.value != '') {
             addTodo(new Todo(
                 inputRef.current.value,
                 routes[activeRouteIndex].type == 'important-collection' ? true : false,
@@ -52,9 +52,9 @@ const TodoEditor = () => {
 
     const inputRef = useRef(null);
 
-    return(
+    return (
         <Editor>
-            <IconContext.Provider value={{ color: theme.borderColor, size: '24px', style: {transition: `color ${theme.transitionTime}ms`} }}>
+            <IconContext.Provider value={{ color: theme.borderColor, size: '24px', style: { transition: `color ${theme.transitionTime}ms` } }}>
                 <FiIcons.FiPlus />
             </IconContext.Provider>
             <Input placeholder="Add new task" onKeyDown={handleKeyDown} ref={inputRef}></Input>

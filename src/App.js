@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import PageHeader from './compontents/PageHeader';
 import SidebarButton from './compontents/SidebarButton';

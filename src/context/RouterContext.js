@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useState } from 'react';
 
 import * as FiIcons from 'react-icons/fi';
 
@@ -15,7 +15,7 @@ const GlobalRoutes = [
     new AppRoute('service', null, '/settings', 'Settings', <FiIcons.FiSettings />, null, <SettingsList />)
 ];
 
-const RouterProvider = ({children}) => {
+const RouterProvider = ({ children }) => {
     const navigate = useNavigate();
     const [activeRouteIndex, setActiveRouteIndex] = useState(0);
     const [routes, setRoutes] = useState(GlobalRoutes);
@@ -38,13 +38,15 @@ const RouterProvider = ({children}) => {
 
     const removeRoute = (collectionId) => {
         const routeIndex = routes.findIndex((route) => route.collectionId == collectionId);
-        if(routeIndex == activeRouteIndex) navigateRoute('/');
+        if (routeIndex == activeRouteIndex) {
+            navigateRoute('/');
+        }
         setRoutes(routes.filter((route) => route.collectionId != collectionId));
     };
 
     const navigateRoute = (routePath) => {
         const routeIndex = routes.findIndex((route) => route.to == routePath);
-        if(routeIndex != -1) {
+        if (routeIndex != -1) {
             setActiveRouteIndex(routeIndex);
             navigate(routePath);
         } else {
@@ -53,8 +55,8 @@ const RouterProvider = ({children}) => {
         }
     };
 
-    return(
-        <RouterContext.Provider value={{ routes, activeRouteIndex, addRoutes, addRoute, updateRoute, removeRoute, navigateRoute}}>
+    return (
+        <RouterContext.Provider value={{ routes, activeRouteIndex, addRoutes, addRoute, updateRoute, removeRoute, navigateRoute }}>
             {children}
         </RouterContext.Provider>
     );

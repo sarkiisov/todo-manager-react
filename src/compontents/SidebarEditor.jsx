@@ -1,9 +1,9 @@
-import { useContext, useState, useRef, useEffect } from 'react';
+import React, { useContext, useState, useRef, useEffect } from 'react';
 
 import styled from 'styled-components';
 import * as FiIcons from 'react-icons/fi';
 import { IconContext } from 'react-icons';
-import { buttonStyle, titleStyle} from '../css/sidebarButtonStyles';
+import { buttonStyle, titleStyle } from '../css/sidebarButtonStyles';
 
 
 import { ThemeContext } from '../context/ThemeContext';
@@ -33,7 +33,7 @@ const Input = styled.input`
 `;
 
 const SidebarEditor = () => {
-    const {theme} = useContext(ThemeContext);
+    const { theme } = useContext(ThemeContext);
     const { collections, addCollection } = useContext(CollectionsContext);
     const [editorOpened, setEditorOpened] = useState(false);
     const [buttonHovered, setButtonHovered] = useState(false);
@@ -41,15 +41,17 @@ const SidebarEditor = () => {
     const [collectionFree, setCollectionFree] = useState(true);
 
     const handleKeyDown = (e) => {
-        if(e.key == 'Enter') {
-            if(collectionFree && inputValue) addCollection(inputValue);
+        if (e.key == 'Enter') {
+            if (collectionFree && inputValue) {
+                addCollection(inputValue);
+            }
             setEditorOpened(false);
         }
     };
 
     useEffect(() => {
-        for(let collection of collections) {
-            if(collection.title == inputValue) {
+        for (const collection of collections) {
+            if (collection.title == inputValue) {
                 setCollectionFree(false);
                 break;
             } else {
@@ -61,9 +63,9 @@ const SidebarEditor = () => {
     const inputRef = useRef(null);
     useOutsideClick(inputRef, () => setEditorOpened(false));
 
-    return(
+    return (
         <Button onClick={() => setEditorOpened(true)} ref={inputRef} onMouseEnter={() => setButtonHovered(true)} onMouseLeave={() => setButtonHovered(false)}>
-            <IconContext.Provider value={{ color: theme.textColor, size: '18px', style: { transition: `color ${theme.transitionTime}ms`} }}>
+            <IconContext.Provider value={{ color: theme.textColor, size: '18px', style: { transition: `color ${theme.transitionTime}ms` } }}>
                 {editorOpened ? <FiIcons.FiList/> : <FiIcons.FiPlus/>}
             </IconContext.Provider>
             {editorOpened

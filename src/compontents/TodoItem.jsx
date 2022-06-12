@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 
 import styled from 'styled-components';
 import * as FiIcons from 'react-icons/fi';
@@ -50,21 +50,21 @@ const Title = styled.p`
 `;
 
 
-const TodoItem = ({todo}) => {
-    const {toggleCompleteTodo, toggleImportantTodo, removeTodo} = useContext(TodosContext);
-    const {theme} = useContext(ThemeContext);
+const TodoItem = ({ todo }) => {
+    const { toggleCompleteTodo, toggleImportantTodo, removeTodo } = useContext(TodosContext);
+    const { theme } = useContext(ThemeContext);
 
     const toggleTodoCheckbox = () => {
         toggleCompleteTodo(todo.id);
     };
 
     const handleMouseDown = (e) => {
-        if(e.button == 1) {
+        if (e.button == 1) {
             removeTodo(todo.id);
         }
     };
 
-    return(
+    return (
         <Item onMouseDown={handleMouseDown}>
             <TodoCheckbox isCompleted={todo.isCompleted} onClick={toggleTodoCheckbox}>
                 <IconContext.Provider value={{ color: 'white', size: '16px', style: { strokeWidth: '3' } }}>

@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from 'react';
+import React, { createContext, useState } from 'react';
 import { ThemeProvider as StyledProvider } from 'styled-components';
 
 const ThemeContext = createContext();
@@ -34,7 +34,7 @@ const Themes = {
     }
 };
 
-const ThemeProvider = ({children}) => {
+const ThemeProvider = ({ children }) => {
     const initialTheme = localStorage.getItem('theme');
     const [theme, setTheme] = useState(initialTheme == null ? Themes.light : Themes[initialTheme]);
 
@@ -49,7 +49,7 @@ const ThemeProvider = ({children}) => {
         localStorage.setItem('theme', key);
     };
 
-    return(
+    return (
         <ThemeContext.Provider value={{ theme, themeKey: Object.entries(Themes).find((pair) => pair[1] == theme)[0], themesKeys: Object.keys(Themes), toggleTheme, setThemeByKey }}>
             <StyledProvider theme={theme}>
                 {children}
@@ -58,4 +58,4 @@ const ThemeProvider = ({children}) => {
     );
 };
 
-export { ThemeContext,  ThemeProvider };
+export { ThemeContext, ThemeProvider };

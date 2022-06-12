@@ -1,12 +1,11 @@
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import TodoEditor from './TodoEditor';
 import TodoItem from './TodoItem';
-import { CSSTransition } from 'react-transition-group';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 import { TodosContext } from '../context/TodosContext';
 import { ThemeContext } from '../context/ThemeContext';
-import { TransitionGroup } from 'react-transition-group';
 import { contentBlockStyle } from '../css/contentBlockStyles';
 
 
@@ -14,11 +13,11 @@ const ListWrapper = styled.div`
     ${contentBlockStyle}
 `;
 
-const TodoList = ({filter}) => {
-    const {theme} = useContext(ThemeContext);
-    const {todos} = useContext(TodosContext);
+const TodoList = ({ filter }) => {
+    const { theme } = useContext(ThemeContext);
+    const { todos } = useContext(TodosContext);
 
-    return(
+    return (
         <ListWrapper>
             <TodoEditor/>
             <TransitionGroup>

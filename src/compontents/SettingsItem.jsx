@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 
 const Item = styled.div`
@@ -9,8 +10,8 @@ const Item = styled.div`
     font-size: 16px;
 `;
 
-const SettingsItem = ({title, settingsElement}) => {
-    return(
+const SettingsItem = ({ title, settingsElement }) => {
+    return (
         <Item>
             <p>{title}</p>
             {settingsElement}

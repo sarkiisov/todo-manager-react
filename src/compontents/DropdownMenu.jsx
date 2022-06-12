@@ -1,4 +1,4 @@
-import { useState, useContext, useRef } from 'react';
+import React, { useState, useContext, useRef } from 'react';
 
 import styled from 'styled-components';
 import { transitionClassesStyle } from '../css/transitionClassesStyles';
@@ -76,8 +76,8 @@ const DropdownOption = styled.div`
     }
 `;
 
-const DropdownMenu = ({options, selectedOption, onChange}) => {
-    const {theme} = useContext(ThemeContext);
+const DropdownMenu = ({ options, selectedOption, onChange }) => {
+    const { theme } = useContext(ThemeContext);
     const [optionsOpened, setOptionsOpened] = useState(false);
     const [option, setOption] = useState(selectedOption);
 
@@ -96,7 +96,7 @@ const DropdownMenu = ({options, selectedOption, onChange}) => {
         setOptionsOpened(false);
     });
 
-    return(
+    return (
         <Wrapper>
             <DropdownBlock onClick={toggleOptionMenu} isOpened={optionsOpened} ref={dropdownRef}>
                 <p>{option}</p>
