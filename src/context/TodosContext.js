@@ -31,7 +31,7 @@ const TodosProvider = ({ children }) => {
     }, [todos]);
 
     return (
-        <TodosContext.Provider value={{ todos, addTodo, toggleCompleteTodo, toggleImportantTodo, removeTodo, removeTodos }}>
+        <TodosContext.Provider value={{ todos, addTodo, toggleCompleteTodo, toggleImportantTodo, removeTodo, removeTodos, setTodos }}>
             {children}
         </TodosContext.Provider>
     );

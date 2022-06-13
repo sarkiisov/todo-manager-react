@@ -12,7 +12,7 @@ const CollectionsContext = createContext();
 
 const CollectionsProvider = ({ children }) => {
     const { removeTodos } = useContext(TodosContext);
-    const { addRoutes, addRoute, updateRoute, removeRoute } = useContext(RouterContext);
+    const { setRoutesArr, updateRoute, removeRoute, removeCustomCollectionRoutes } = useContext(RouterContext);
     const initialCollections = localStorage.getItem('collections');
     const [collections, setCollections] = useState(initialCollections == null ? [] : JSON.parse(initialCollections));
 
@@ -24,15 +24,13 @@ const CollectionsProvider = ({ children }) => {
     const addCollection = (title) => {
         const collection = new CustomCollection(title);
         setCollections([...collections, collection]);
-        addRoute(new AppRoute(
-            'custom-collection',
-            collection.id,
-            `/collection/${collection.id}`,
-            collection.title,
-            <FiIcons.FiList />,
-            collection.icon,
-            <TodoList filter={(todo) => todo.collectionId == collection.id}/>
-        ));
+        //addRoute(buildRoute(collection));
+    };
+
+    const setCollectionsArr = (collections) => {
+        removeCustomCollectionRoutes();
+        setCollections(collections);
+        //addRoutes(collections.map((collection) => buildRoute(collection)));
     };
 
     const updateCollection = (id, title, icon) => {
@@ -50,27 +48,26 @@ const CollectionsProvider = ({ children }) => {
         removeRoute(id);
     };
 
-    useEffect(() => {
-        addRoutes(collections.map(
-            (collection) => (new AppRoute(
-                'custom-collection',
-                collection.id,
-                `/collection/${collection.id}`,
-                collection.title,
-                <FiIcons.FiList />,
-                collection.icon,
-                <TodoList filter={(todo) => todo.collectionId == collection.id}/>
-            ))
-        ));
-    }, []);
+    const buildRoute = (collection) => {
+        return new AppRoute(
+            'custom-collection',
+            collection.id,
+            `/collection/${collection.id}`,
+            collection.title,
+            <FiIcons.FiList />,
+            collectionEmojiArr[collection.icon],
+            <TodoList filter={(todo) => todo.collectionId == collection.id}/>
+        );
+    };
 
     useEffect(() => {
+        setRoutesArr(collections.map((collection) => buildRoute(collection)));
         localStorage.setItem('collections', JSON.stringify(collections));
     }, [collections]);
 
 
     return (
-        <CollectionsContext.Provider value={{ collections, addCollection, updateCollection, removeCollection, collectionEmojiArr }}>
+        <CollectionsContext.Provider value={{ collections, addCollection, updateCollection, removeCollection, setCollections: setCollectionsArr, collectionEmojiArr }}>
             {children}
         </CollectionsContext.Provider>
     );

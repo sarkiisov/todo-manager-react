@@ -6,13 +6,15 @@ import SettingsList from '../compontents/SettingsList';
 import TodoList from '../compontents/TodoList';
 import { useNavigate } from 'react-router-dom';
 import { AppRoute } from '../models/AppRoute';
+import SyncProcess from '../compontents/SyncProcess';
 
 const RouterContext = createContext();
 
 const GlobalRoutes = [
     new AppRoute('defined-collection', null, '/', 'Overview', <FiIcons.FiHome />, null, <TodoList filter={(todo) => todo}/>),
     new AppRoute('important-collection', null, '/important', 'Important', <FiIcons.FiStar />, null, <TodoList filter={(todo) => todo.isImportant} />),
-    new AppRoute('service', null, '/settings', 'Settings', <FiIcons.FiSettings />, null, <SettingsList />)
+    new AppRoute('service', null, '/settings', 'Settings', <FiIcons.FiSettings />, null, <SettingsList />),
+    new AppRoute('service', null, '/sync', 'Sync', <FiIcons.FiShare2 />, null, <SyncProcess />)
 ];
 
 const RouterProvider = ({ children }) => {
@@ -26,6 +28,10 @@ const RouterProvider = ({ children }) => {
 
     const addRoute = (appRoute) => {
         setRoutes([...routes, appRoute]);
+    };
+
+    const setRoutesArr = (collectionRoutesArr) => {
+        setRoutes([...GlobalRoutes, ...collectionRoutesArr]);
     };
 
     const updateRoute = (collectionId, title, buttonEmojiIcon) => {
@@ -44,6 +50,10 @@ const RouterProvider = ({ children }) => {
         setRoutes(routes.filter((route) => route.collectionId != collectionId));
     };
 
+    const removeCustomCollectionRoutes = () => {
+        setRoutes(routes.filter((route) => route.type != 'custom-collection'));
+    };
+
     const navigateRoute = (routePath) => {
         const routeIndex = routes.findIndex((route) => route.to == routePath);
         if (routeIndex != -1) {
@@ -56,7 +66,7 @@ const RouterProvider = ({ children }) => {
     };
 
     return (
-        <RouterContext.Provider value={{ routes, activeRouteIndex, addRoutes, addRoute, updateRoute, removeRoute, navigateRoute }}>
+        <RouterContext.Provider value={{ routes, activeRouteIndex, addRoutes, addRoute, setRoutesArr, updateRoute, removeRoute, removeCustomCollectionRoutes, navigateRoute }}>
             {children}
         </RouterContext.Provider>
     );

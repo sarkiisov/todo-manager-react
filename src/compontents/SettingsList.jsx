@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { ThemeContext } from '../context/ThemeContext';
 import { contentBlockStyle } from '../css/contentBlockStyles';
+import { headerBlockStyles } from '../css/headerBlockStyles';
 
 import DropdownMenu from './DropdownMenu';
 import SettingsItem from './SettingsItem';
@@ -12,12 +13,7 @@ const Wrapper = styled.div`
 `;
 
 const Header = styled.div`
-    display: flex;
-    align-items: center;
-    width: auto;
-    height: 50px;
-    font-size: 14px;
-    font-weight: 500;
+    ${headerBlockStyles}
 `;
 
 const SettingsList = () => {

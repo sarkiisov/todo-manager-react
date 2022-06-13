@@ -1,5 +1,5 @@
 export class AppRoute {
-    constructor(type, collectionId = null, to, title, buttonIcon, buttonEmojiIcon, component) {
+    constructor(type, collectionId, to, title, buttonIcon, buttonEmojiIcon, component) {
         this.type = type;
         this.collectionId = collectionId;
         this.to = to;

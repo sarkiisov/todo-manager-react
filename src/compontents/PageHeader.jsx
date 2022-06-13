@@ -137,7 +137,7 @@ const PageHeader = () => {
     }, [iconEditorRef, iconOptionsRef]);
 
     const handleClick = (icon, index) => {
-        updateCollection(routes[activeRouteIndex].collectionId, routes[activeRouteIndex].title, index == 0 ? null : icon);
+        updateCollection(routes[activeRouteIndex].collectionId, routes[activeRouteIndex].title, index == 0 ? null : index);
         setIconEditorOpened(false);
     };
 

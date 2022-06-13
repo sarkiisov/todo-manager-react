@@ -14,6 +14,7 @@ import { TodosProvider } from './context/TodosContext';
 import { HashRouter as Router } from 'react-router-dom';
 import { RouterProvider } from './context/RouterContext';
 import { CollectionsProvider } from './context/CollectionsContext';
+import { SyncProvider } from './context/SyncContext';
 
 const GlobalStyles = createGlobalStyle`
     ${fontFace('Roboto', RobotoLight, 'normal', 300)}
@@ -36,7 +37,9 @@ ReactDOM.render(
                 <TodosProvider>
                     <RouterProvider>
                         <CollectionsProvider>
-                            <App />
+                            <SyncProvider>
+                                <App />
+                            </SyncProvider>
                         </CollectionsProvider>
                     </RouterProvider >
                 </TodosProvider>
