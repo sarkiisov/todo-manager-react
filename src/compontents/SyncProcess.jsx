@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect, useRef } from 'react';
 
 import { Peer } from 'peerjs';
 import styled from 'styled-components';
+import StepBar from './StepBar';
 
 import { contentBlockStyle } from '../css/contentBlockStyles';
 import { headerBlockStyles } from '../css/headerBlockStyles';
@@ -56,37 +57,6 @@ const ConnectionButtonsBlock = styled.div`
     margin-bottom: 10px;
 `;
 
-const Node = styled.div`
-    height: 14px;
-    width: 14px;
-    border-radius: 50%;
-    display:inline-block;
-    background-color: ${(props) => props.status ? props.theme.todoChekcedBackgroundColor : props.theme.textColor};
-`;
-
-const Divider = styled.div`
-    height: 35px;
-    width: 2px;
-    margin-left: 6px;
-    background-color: ${(props) => props.status ? props.theme.todoChekcedBackgroundColor : props.theme.textColor};
-`;
-
-const ListElement = styled.li`
-    position: relative;
-    display: flex;
-    align-items: center;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-
-    > p {
-        position: absolute;
-        margin-left: 25px;
-        line-height: 20px;
-    }
-`;
-
 const SyncProcess = () => {
     const { theme } = useContext(ThemeContext);
     const { SyncData } = useContext(SyncContext);
@@ -100,6 +70,20 @@ const SyncProcess = () => {
     const [syncConfirmed, setSyncConfirmed] = useState(false);
     const [todosSynced, setTodosSynced] = useState(false);
 
+    const stepsArr = [
+        {
+            status: connected,
+            label: 'Connection established'
+        },
+        {
+            status: syncConfirmed,
+            label: 'Sync process confirmed'
+        },
+        {
+            status: todosSynced,
+            label: 'Todos were synchronized'
+        }
+    ];
 
     useEffect(() => {
         SyncData.peer = new Peer();
@@ -217,26 +201,7 @@ const SyncProcess = () => {
             <Header>
                 <p>Sync status</p>
             </Header>
-            <ul>
-                <ListElement>
-                    <Node status={connected}></Node>
-                    <p>Connection established</p>
-                </ListElement>
-                <ListElement>
-                    <Divider status={syncConfirmed}></Divider>
-                </ListElement>
-                <ListElement>
-                    <Node status={syncConfirmed}></Node>
-                    <p>Sync process confirmed</p>
-                </ListElement>
-                <ListElement>
-                    <Divider status={todosSynced}></Divider>
-                </ListElement>
-                <ListElement>
-                    <Node status={todosSynced}></Node>
-                    <p>Todos were synchronized</p>
-                </ListElement>
-            </ul>
+            <StepBar stepsArr={stepsArr}/>
         </Wrapper>
     );
 };
