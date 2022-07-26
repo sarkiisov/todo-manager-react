@@ -24,13 +24,11 @@ const CollectionsProvider = ({ children }) => {
     const addCollection = (title) => {
         const collection = new CustomCollection(title);
         setCollections([...collections, collection]);
-        //addRoute(buildRoute(collection));
     };
 
     const setCollectionsArr = (collections) => {
         removeCustomCollectionRoutes();
         setCollections(collections);
-        //addRoutes(collections.map((collection) => buildRoute(collection)));
     };
 
     const updateCollection = (id, title, icon) => {
