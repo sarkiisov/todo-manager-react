@@ -7,6 +7,7 @@ import { AppRoute } from '../models/AppRoute';
 import { RouterContext } from './RouterContext';
 import { TodosContext } from './TodosContext';
 import CustomCollection from '../models/CustomCollection';
+import { charsToString } from '../utils/charsToString';
 
 const CollectionsContext = createContext();
 
@@ -53,7 +54,7 @@ const CollectionsProvider = ({ children }) => {
             `/collection/${collection.id}`,
             collection.title,
             <FiIcons.FiList />,
-            collectionEmojiArr[collection.icon],
+            charsToString(collection.icon),
             <TodoList filter={(todo) => todo.collectionId == collection.id}/>
         );
     };

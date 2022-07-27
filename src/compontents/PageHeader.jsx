@@ -11,6 +11,7 @@ import { IconContext } from 'react-icons';
 import * as FiIcons from 'react-icons/fi';
 import { CSSTransition } from 'react-transition-group';
 import useOutsideClick from '../hooks/useOutsideClick';
+import { stringToChars } from '../utils/stringToChars';
 
 
 const Header = styled.div`
@@ -137,7 +138,7 @@ const PageHeader = () => {
     }, [iconEditorRef, iconOptionsRef]);
 
     const handleClick = (icon, index) => {
-        updateCollection(routes[activeRouteIndex].collectionId, routes[activeRouteIndex].title, index == 0 ? null : index);
+        updateCollection(routes[activeRouteIndex].collectionId, routes[activeRouteIndex].title, index == 0 ? null : stringToChars(icon));
         setIconEditorOpened(false);
     };
 

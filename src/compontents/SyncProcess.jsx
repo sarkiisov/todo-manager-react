@@ -139,7 +139,7 @@ const SyncProcess = () => {
 
     const confirmSync = () => {
         setSyncConfirmed(true);
-        SyncData.connection.send({ header: 'confirm', patload: null });
+        SyncData.connection.send({ header: 'confirm', payload: null });
     };
 
     const closeConnection = () => {
@@ -163,7 +163,7 @@ const SyncProcess = () => {
                 <p>App sync code</p>
             </Header>
             <TextLineBlock>
-                {!peerIdFetched &&
+                {peerIdFetched &&
                     <>
                         <p className="peer-id">{peerId}</p>
                         <IconContext.Provider value={{
@@ -174,7 +174,6 @@ const SyncProcess = () => {
                                 cursor: 'pointer'
                             }
                         }}>
-                            <FiIcons.FiCopy />
                         </IconContext.Provider>
                     </>
                 }
