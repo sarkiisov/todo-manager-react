@@ -74,31 +74,31 @@ const App = () => {
             <AppWrapper>
                 <Sidebar>
                     <MainSidebarGroup>
-                        {routes.map((route, index) => {
-                            return (route.type.includes('collection'))
-                                ? <SidebarButton
-                                    icon={route.type == 'custom-collection' && route.buttonEmojiIcon ? route.buttonEmojiIcon : route.buttonIcon}
-                                    title={route.title}
-                                    id={index}
-                                    route={route.to}
-                                    key={index}
-                                    collectionId={route.collectionId} />
-                                : null;
-                        })}
+                        {routes.map((route, index) => (
+                            route.type.includes('collection') &&
+                            <SidebarButton
+                                icon={route.type == 'custom-collection' && route.buttonEmojiIcon ? route.buttonEmojiIcon : route.buttonIcon}
+                                title={route.title}
+                                id={index}
+                                route={route.to}
+                                key={index}
+                                collectionId={route.collectionId}
+                            />
+                        ))}
                         <SidebarEditor/>
                     </MainSidebarGroup>
                     <SidebarDivider />
                     <AddSidebarGroup>
-                        {routes.map((route, index) => {
-                            return (route.type == 'service')
-                                ? <SidebarButton
-                                    icon={route.buttonIcon}
-                                    title={route.title}
-                                    route={route.to}
-                                    id={index}
-                                    key={index} />
-                                : null;
-                        })}
+                        {routes.map((route, index) => (
+                            route.type == 'service' &&
+                            <SidebarButton
+                                icon={route.buttonIcon}
+                                title={route.title}
+                                route={route.to}
+                                id={index}
+                                key={index}
+                            />
+                        ))}
                     </AddSidebarGroup>
                 </Sidebar>
                 <ContentPage>

@@ -163,8 +163,7 @@ const SyncProcess = () => {
                 <p>App sync code</p>
             </Header>
             <TextLineBlock>
-                {peerIdFetched
-                    ?
+                {!peerIdFetched &&
                     <>
                         <p className="peer-id">{peerId}</p>
                         <IconContext.Provider value={{
@@ -178,20 +177,17 @@ const SyncProcess = () => {
                             <FiIcons.FiCopy />
                         </IconContext.Provider>
                     </>
-                    : null
                 }
             </TextLineBlock>
             <Header>
                 <p>Connection setup</p>
             </Header>
-            {connected
-                ? null
-                : <Input placeholder="Peer sync code" ref={inputRef}/>
+            {!connected &&
+                <Input placeholder="Peer sync code" ref={inputRef}/>
             }
             <ConnectionButtonsBlock>
-                {connected && SyncData.mode == 'call' && !todosSynced
-                    ? <Button onClick={confirmSync}>Confirm sync</Button>
-                    : null
+                {(connected && SyncData.mode == 'call' && !todosSynced) &&
+                    <Button onClick={confirmSync}>Confirm sync</Button>
                 }
                 {connected
                     ? <Button onClick={closeConnection}>Close connection</Button>
